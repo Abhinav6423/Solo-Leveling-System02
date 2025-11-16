@@ -1,166 +1,91 @@
-🗡️ Solo Leveling — Jinwoo System (Gamified Productivity App)
+<h1 align="center">⚡ Solo Leveling — Jinwoo System</h1>
+<p align="center"><i>A gamified productivity & self-improvement system inspired by Sung Jin-Woo</i></p>
 
-A gamified self-improvement and task-management system inspired by Sung Jin-Woo’s leveling system from Solo Leveling.
-This app turns your real-life habits, tasks, and goals into quests, allows you to earn XP, level up, build streaks, and grow daily — just like a hunter.
+---
 
-🚀 Features
-🔥 Core Gameplay
+## 🌟 Overview
 
-🎯 Create Daily Quests (tasks like workout, coding, meditation, etc.)
+The **Jinwoo System** turns your real-life tasks, habits, and goals into a leveling adventure —  
+just like Solo Leveling.  
+Complete quests → Earn XP → Level up → Improve stats → Become stronger every day.
 
-⏳ Timed Quests (focus sessions: 25 min, 50 min, etc.)
+---
 
-📈 Leveling System
+## 🚀 Features
 
-Complete quests → Earn XP
+### 🎯 **Daily & Custom Quests**
+- Add tasks like workout, coding, meditation, study, yoga, etc.
+- Choose priority, XP rewards, timers, difficulty.
 
-Level up → Unlock new achievements
+### ⏱ **Timed Quests**
+- Pomodoro-style focus sessions (25, 50 mins)
+- Timer-based tasks for discipline
 
-🔥 Streak System
+### 🧪 **XP & Leveling System**
+- Complete quests → earn XP  
+- Level up → unlock new achievements  
+- Failure = XP penalties (optional)
 
-Maintain daily discipline
+### 🔥 **Streaks System**
+- Build daily streaks  
+- Higher streak = XP multiplier  
+- Perfect for discipline, routine, and habit-building
 
-Increase streak multiplier for more XP
+---
 
-🧩 Skill Progression (Hunter Stats)
+## 💪 **Hunter Stats (Skill Progression)**
 
-Your real-life progress translates into stats:
+Your real-life progress upgrades your character stats:
 
-Stat	Meaning
-⚔️ Strength	Gym progress, workout levels
-🧠 Intelligence	Coding study hours, books
-🕊️ Agility	Yoga, flexibility training
-❤️ Vitality	Hydration, nutrition, sleep
-🎯 Focus	Deep work sessions
+| Stat | Meaning |
+|------|---------|
+| 🗡 Strength | Gym workouts, running, pushups |
+| 🧠 Intelligence | Coding hours, reading, courses |
+| 🌀 Agility | Yoga, flexibility, mobility |
+| ❤️ Vitality | Sleep, hydration, diet |
+| 🎯 Focus | Pomodoro sessions, study streaks |
 
-Stats increase when related quests are completed.
+---
 
-📚 Modules
-✔️ Task System
+## 🏆 Achievements
+Unlock rank-based achievements inspired by hunters:
+- **E-Rank Beginner**
+- **D-Rank Grinder**
+- **C-Rank Warrior**
+- **B-Rank Elite**
+- **A-Rank Hunter**
+- **S-Rank Shadow Monarch** 👑
 
-Create quests
+---
 
-Set priorities
+## 📊 Dashboard Preview
+(Add screenshots/gifs here later if you want.)
 
-Add sub-tasks
+---
 
-XP rewards
+## 🛠 Tech Stack (To Be Updated as You Build)
+- **Frontend:** React + Tailwind  
+- **Backend:** Node.js, Express  
+- **Database:** MongoDB  
+- **Auth:** JWT  
+- **State Management:** Zustand / Redux  
 
-Daily reset system
+---
 
-✔️ User System
+## 🚧 Current Status
+- In development  
+- Working on quests, XP logic, streaks, and dashboard UI  
 
-Login / signup
+---
 
-JWT auth
+## 🤝 Contributing
+Open for suggestions, ideas, or feature requests.  
+Feel free to submit an issue!
 
-User XP, level & stats stored in database
+---
 
-✔️ Analytics Dashboard
+## ⭐ Show Support
+If you like the idea, please **star 🌟 the repo** — it motivates development!
 
-XP chart
+---
 
-Daily progress
-
-Completion rate
-
-Streaks visualized
-
-🏗️ Tech Stack
-Frontend
-
-React.js
-
-Tailwind CSS
-
-Framer Motion
-
-Zustand / Context API (depending on your setup)
-
-Backend
-
-Node.js
-
-Express.js
-
-MongoDB + Mongoose
-
-JWT Auth
-
-Cron jobs for daily reset
-
-⚙️ Cron Jobs (System Automation)
-
-🔄 Reset daily quests at 12 AM
-
-⏫ Recalculate streaks
-
-🧹 Delete expired tasks
-
-🧠 Update XP & stats
-
-📂 Folder Structure
-/backend
-  ├── controllers
-  ├── models
-  ├── routes
-  ├── config
-  ├── utils
-
-/frontend
-  ├── src
-      ├── components
-      ├── pages
-      ├── hooks
-      ├── context
-
-🧪 API Endpoints
-Auth
-POST /api/auth/signup
-POST /api/auth/login
-
-Tasks
-POST   /api/tasks
-GET    /api/tasks
-PATCH  /api/tasks/:id
-DELETE /api/tasks/:id
-
-Stats
-GET /api/stats
-PATCH /api/stats/update
-
-🏅 Leveling Formula
-XP Required = Level * 100
-
-
-XP earned per task depends on:
-
-Priority
-
-Difficulty
-
-Streak multiplier
-
-
-
-🛠️ Setup Instructions
-1. Clone the repo
-git clone https://github.com/Abhinav6423/your-repo.git
-
-2. Install dependencies (backend)
-cd backend
-npm install
-
-3. Install dependencies (frontend)
-cd frontend
-npm install
-
-4. Run the project
-npm run dev
-
-❤️ Inspiration
-
-This project is inspired by Solo Leveling and Sung Jin-Woo’s unstoppable drive toward self-improvement.
-The goal is simple:
-
-“Become stronger than yesterday.”
