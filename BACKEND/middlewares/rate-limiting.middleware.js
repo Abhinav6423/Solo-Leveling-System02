@@ -1,0 +1,12 @@
+import rateLimit from "express-rate-limit";
+
+export const apiLimiter = rateLimit ( {
+    windowMs : 15*60*1000, // 15 minutes  this is in milliseconds   and it does not allow more than 10 requests per 15 minutes
+    max : 10,
+    message : {
+        success : false,
+        message : "Too many requests from this IP, please try again after 15 minutes"
+    },
+    standardHeaders : true, // return rate limit info in the `RateLimit-*` headers
+    legacyHeaders : false 
+})
