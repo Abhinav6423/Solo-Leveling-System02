@@ -33,19 +33,6 @@ Complete quests → Earn XP → Level up → Improve stats → Become stronger e
 
 ---
 
-## 💪 **Hunter Stats (Skill Progression)**
-
-Your real-life progress upgrades your character stats:
-
-| Stat | Meaning |
-|------|---------|
-| 🗡 Strength | Gym workouts, running, pushups |
-| 🧠 Intelligence | Coding hours, reading, courses |
-| 🌀 Agility | Yoga, flexibility, mobility |
-| ❤️ Vitality | Sleep, hydration, diet |
-| 🎯 Focus | Pomodoro sessions, study streaks |
-
----
 
 ## 🏆 Achievements
 Unlock rank-based achievements inspired by hunters:
@@ -58,10 +45,7 @@ Unlock rank-based achievements inspired by hunters:
 
 ---
 
-## 📊 Dashboard Preview
-(Add screenshots/gifs here later if you want.)
 
----
 
 ## 🛠 Tech Stack (To Be Updated as You Build)
 - **Frontend:** React + Tailwind  
