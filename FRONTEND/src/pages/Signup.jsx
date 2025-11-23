@@ -1,7 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("");
+    const [profilePic, setProfilePic] = useState("");
+
+    const navigate = useNavigate();
+
+    const signup = async () => {
+        try {
+            const res = await axios.post("http://localhost:9000/api/auth/register",
+                { username, email, password, profilePic },
+                { withCredentials: true }
+            );
+            if (res.status === 200) {
+                console.log(res.data.user)
+                navigate("/home/dashboard")
+            }
+        } catch (err) {
+            console.log("Axios error:");
+            console.log(err.message);
+            console.log(err.response?.status);
+            console.log(err.response?.data);
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        signup()
+    }
     return (
         <div className="flex h-screen text-white font-inter "
             style={{
@@ -43,36 +74,45 @@ const Signup = () => {
                     <h2 className="text-3xl font-semibold mb-2">Create Account</h2>
                     <p className="text-gray-400 mb-6">Please enter details to create an account</p>
 
-                    <form className="space-y-4">
-                        <div className="flex space-x-4">
-                            <input
-                                type="text"
-                                placeholder="First name*"
-                                className="w-1/2 p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Last name*"
-                                className="w-1/2 p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
-                            />
-                        </div>
+                    <form className="space-y-4" onSubmit={handleSubmit}>
+
+                        <input
+                            type="text"
+                            placeholder="User name*"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className="w-full p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+
 
                         <input
                             type="email"
                             placeholder="Email*"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                         />
 
                         <input
                             type="password"
                             placeholder="Password*"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Enter Image Url"
+                            value={profilePic}
+                            onChange={(e) => setProfilePic(e.target.value)}
                             className="w-full p-3 bg-[#111C2E] border border-gray-600 rounded-md focus:outline-none focus:border-blue-500"
                         />
 
 
-                        <div className="flex items-center text-sm text-gray-400">
+                        {/* <div className="flex items-center text-sm text-gray-400">
                             <input type="checkbox" className="mr-2 accent-blue-500" />
-                        </div>
+                        </div> */}
 
                         <button
                             type="submit"

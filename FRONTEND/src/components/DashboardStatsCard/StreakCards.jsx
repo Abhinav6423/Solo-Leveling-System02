@@ -1,7 +1,10 @@
 import React from "react";
 import { Flame } from "lucide-react"; // flame icon (you can install lucide-react if not already)
+import { useAuth } from "../../context/AuthContext";
+import dayjs from "dayjs";
 
 const DailyStreakCard = () => {
+    const { userData } = useAuth();
     return (
         <div className="bg-transparent  border-2 border-blue-400 rounded-lg  rounded-r-2xl p-5 h-full max-h-[250px] max-w-full shadow-xl text-white backdrop-blur-lg hover:scale-[1.02] transition-all duration-300">
             {/* Header */}
@@ -15,7 +18,7 @@ const DailyStreakCard = () => {
             <div className="flex items-center justify-between px-2">
                 {/* Circle Streak Count */}
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-dashed border-blue-500 flex flex-col items-center justify-center text-center shadow-[0_0_10px_#3b82f6]">
-                    <span className="text-2xl sm:text-4xl font-bold text-white">42</span>
+                    <span className="text-2xl sm:text-4xl font-bold text-white">{userData?.streak?.current}</span>
                     <span className="text-xs sm:text-sm text-gray-400">Days</span>
                 </div>
 
@@ -26,8 +29,8 @@ const DailyStreakCard = () => {
                             <div key={day} className="flex flex-col items-center">
                                 <div
                                     className={`w-8 h-8 rounded-full flex items-center justify-center ${idx < 5
-                                            ? "bg-blue-500/20 text-blue-400 border border-blue-500 shadow-[0_0_10px_#3b82f6]"
-                                            : "bg-transparent text-gray-600 border border-gray-700"
+                                        ? "bg-blue-500/20 text-blue-400 border border-blue-500 shadow-[0_0_10px_#3b82f6]"
+                                        : "bg-transparent text-gray-600 border border-gray-700"
                                         }`}
                                 >
                                     <Flame
@@ -51,13 +54,16 @@ const DailyStreakCard = () => {
             <div className="flex justify-between text-xs sm:text-sm text-gray-400 mt-4 border-t border-[#1e2b45] pt-2">
                 <p>
                     Longest streak:{" "}
-                    <span className="text-gray-200 font-bold text-lg">64 Days</span>
+                    <span className="text-gray-200 font-bold text-lg">{userData?.streak?.longest} Days</span>
                 </p>
                 <p>
                     Last login:{" "}
                     <span className="text-gray-200 font-bold text-lg">
-                        12th October, 2025
+                        {userData?.streak?.lastLogin
+                            ? dayjs(userData.streak.lastLogin).format("DD MMM YYYY")
+                            : "—"}
                     </span>
+
                 </p>
             </div>
         </div>

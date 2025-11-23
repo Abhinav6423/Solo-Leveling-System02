@@ -43,7 +43,7 @@ export const registerUser = async (req, res) => {
         });
 
         // 7. Response back to frontend
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: "✅ User registered successfully",
             user: sanitizeUser(user),

@@ -42,7 +42,7 @@ app.use(xssSanitizer);
 // app.use(mongoSanitize({
 //     replaceWith: "_",
 // })); //prevents attacker from injecting malicious code into the database to manipulate mongodb queries.
-app.use("/api/auth", apiLimiter); // Apply rate limiting middleware to all routes starting with "/api"
+// app.use("/api/auth", apiLimiter); // Apply rate limiting middleware to all routes starting with "/api"
 
 // ================================
 // 📦 Database Connection

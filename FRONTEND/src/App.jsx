@@ -6,6 +6,7 @@ import Layout from './pages/Layout'
 import LoginPage from './pages/Login'
 import Signup from './pages/Signup'
 import ViewTask from './pages/ViewTask'
+import AuthProvider from './context/AuthProvider'
 const App = () => {
   return (
 
@@ -14,11 +15,13 @@ const App = () => {
         <Route path='/' element={<LoginPage />} />
         <Route path='/register' element={<Signup />} />
         {/* Dashboard Layout with Sidebar */}
-        <Route path="/home" element={<Layout />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="task-create" element={<TaskCreation />} />
-          <Route path="task-view" element={<ViewTask />} />
-        {/* <Route path="leaderboard" element={<Leaderboard />} /> */}
+        <Route element={<AuthProvider />}>
+          <Route path="/home" element={<Layout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="task-create" element={<TaskCreation />} />
+            <Route path="task-view" element={<ViewTask />} />
+            {/* <Route path="leaderboard" element={<Leaderboard />} /> */}
+          </Route>
         </Route>
       </Routes>
     </div>
