@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+function Login() {
 
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState(""); // 🔥 error popup msg
 
     const navigate = useNavigate();
 
@@ -19,47 +18,55 @@ export default function LoginPage() {
                 { withCredentials: true }
             );
 
-            console.log(res.data.user);
-            navigate("/home/dashboard");
+            if (res.status === 200) {
+                navigate("/home/dashboard");
+            }
 
         } catch (err) {
-            console.log("Axios error:");
-            console.log(err.message);
-            console.log(err.response?.status);
-            console.log(err.response?.data);
+            console.log("Axios error:", err);
+
+            // Extract backend error message or default
+            const msg = err.response?.data?.message || "Something went wrong";
+
+            setErrorMsg(msg);
+
+            // remove popup after 3 sec
+            setTimeout(() => setErrorMsg(""), 3000);
         }
     };
 
-
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         login();
-
-    }
-
+    };
 
     return (
-        <div className="flex h-screen text-white"
+        <div
+            className="flex h-screen text-white"
             style={{
                 backgroundImage: "url('https://i.pinimg.com/1200x/23/20/89/23208915151ff56011e7bce46bb30f62.jpg')",
                 backgroundSize: "cover",
-                backgroundPosition: "center"
-            }}>
-            {/* Left Side - Image */}
-            <div
-                className="w-1/2 bg-cover bg-center"
-
-            >
+                backgroundPosition: "center",
+            }}
+        >
+            {/* Left Side */}
+            <div className="w-1/2 bg-cover bg-center">
                 <div className="h-full w-full bg-black/60 flex items-center justify-center">
-                    <h1 className="text-3xl font-semibold tracking-widest opacity-80">
-                        {/* Optional text/logo can go here */}
-                    </h1>
+                    <h1 className="text-3xl font-semibold tracking-widest opacity-80"></h1>
                 </div>
             </div>
 
-            {/* Right Side - Form */}
+            {/* Right Side */}
             <div className="w-1/2 bg-slate-900/90 backdrop-blur-lg flex flex-col justify-center items-center px-10">
                 <div className="max-w-md w-full">
+
+                    {/* 🔥 Error Popup */}
+                    {errorMsg && (
+                        <div className="mb-4 bg-red-500 text-white px-4 py-2 rounded-md text-center shadow-lg animate-pulse">
+                            {errorMsg}
+                        </div>
+                    )}
+
                     {/* Toggle Buttons */}
                     <div className="flex justify-center mb-6 space-x-2">
                         <button className="px-6 py-2 bg-white text-black rounded-lg font-semibold shadow-md hover:bg-gray-200 transition">
@@ -75,6 +82,7 @@ export default function LoginPage() {
                     <h2 className="text-3xl font-semibold mb-2 text-center">
                         Welcome Back
                     </h2>
+
                     <p className="text-gray-400 mb-8 text-center">
                         Please enter details to log into your account
                     </p>
@@ -84,6 +92,7 @@ export default function LoginPage() {
                         <div className="mb-4">
                             <label className="block text-sm font-medium mb-2">Email*</label>
                             <input
+                                required
                                 type="email"
                                 placeholder="Enter your email"
                                 value={email}
@@ -96,6 +105,7 @@ export default function LoginPage() {
                         <div className="mb-6">
                             <label className="block text-sm font-medium mb-2">Password*</label>
                             <input
+                                required
                                 type="password"
                                 placeholder="Enter your password"
                                 value={password}
@@ -107,7 +117,8 @@ export default function LoginPage() {
                         {/* Login Button */}
                         <button
                             type="submit"
-                            className="w-full bg-white text-black font-semibold py-2 rounded-md hover:bg-gray-200 transition">
+                            className="w-full bg-white text-black font-semibold py-2 rounded-md hover:bg-gray-200 transition"
+                        >
                             Log in
                         </button>
                     </form>
@@ -128,9 +139,10 @@ export default function LoginPage() {
                         />
                         <span>Google</span>
                     </button>
-
                 </div>
             </div>
         </div>
     );
 }
+
+export default Login;

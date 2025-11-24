@@ -3,22 +3,25 @@ import { body, validationResult } from "express-validator";
 //validateResult lets you handle validation errors and send appropriate responses to the client
 
 export const validateUser = [
-    body("email")
+    body("email")  // to validate a field
         .isEmail()
-        .withMessage("Please enter a valid email address"),
+        .withMessage("Please enter a valid email address"), // to show custom message
 
-    body("password")
+    body("password") // to validate a field
         .isLength({ min: 6 })
-        .withMessage("Password must be at least 6 characters long"),
+        .withMessage("Password must be at least 6 characters long"), // to show custom message
 
-    (req, res, next) => { //this runs after all validations are checked above and returns an array of errors
-        const errors = validationResult(req) //collects all validation errors by express-validator and stores them in a variable called errors
+    (req, res, next) => {
+        const errors = validationResult(req); // to get errors
 
-        if (!errors.isEmpty()) { //checks if no errors are found
-            return res.status(400).json({ success: false, errors: errors.array() })
-        } else {
-            next()
-
+        if (!errors.isEmpty()) {
+            // send single readable message
+            return res.status(400).json({
+                success: false,
+                message: errors.array()[0].msg
+            });
         }
+
+        next();
     }
-]
+];
