@@ -31,10 +31,13 @@ const app = express();
 app.use(express.json()); // Parse incoming JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse incoming URL-encoded requests
 app.use(cookieParser()); // Parse cookies
+const clientUrl = process.env.CLIENT_URL || "http://localhost:5173"
 app.use(
     cors({
-        origin: process.env.CLIENT_URL || "http://localhost:5173",
+        origin: clientUrl,
         credentials: true, // Allow cookies / credentials
+        methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 app.use(helmet());
@@ -77,7 +80,7 @@ app.use("/api/tasks", taskRoutes);
 // ================================
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`⚡ Server is live on: http://localhost:${PORT}`);
+    console.log(`⚡ Server is live on: http://localhost:${PORT} and clientUrl is ${clientUrl}`);
 });
 
 

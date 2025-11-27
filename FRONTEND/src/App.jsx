@@ -6,7 +6,7 @@ import Layout from './pages/Layout'
 import LoginPage from './pages/Login'
 import Signup from './pages/Signup'
 import ViewTask from './pages/ViewTask'
-import AuthProvider from './context/AuthProvider'
+import PrivateRoute from './PrivateRoute'
 const App = () => {
   return (
 
@@ -15,7 +15,7 @@ const App = () => {
         <Route path='/' element={<LoginPage />} />
         <Route path='/register' element={<Signup />} />
         {/* Dashboard Layout with Sidebar */}
-        <Route element={<AuthProvider />}>
+        <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="task-create" element={<TaskCreation />} />

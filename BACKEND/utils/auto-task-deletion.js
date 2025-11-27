@@ -9,7 +9,7 @@ export const startTaskCleanupJob = () => {
 
         const now = new Date();
         const expiredTasks = await Task.find({
-            createdAt: { $lte: new Date(now - 30 * 1000) }, // older than 30s
+            createdAt: { $lte: new Date(now - 24 * 60 * 60 * 1000) }, // older than 24 hours
         });
 
         for (const task of expiredTasks) {

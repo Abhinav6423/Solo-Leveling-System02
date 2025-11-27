@@ -19,7 +19,7 @@ function Login() {
             );
 
             if (res.status === 200) {
-                navigate("/home/dashboard");
+                window.location.href = "/home/dashboard";
             }
 
         } catch (err) {

@@ -40,8 +40,8 @@ const taskSchema = new Schema(
         },
         priority: {
             type: String,
-            enum: ['Low', 'Medium', 'High'],
-            default: 'Low'
+            enum: ['low', 'medium', 'high'],
+            default: 'low'
 
         },
         xp: {
@@ -85,14 +85,14 @@ taskSchema.pre("save", async function (next) {
 
 
         if (priority >= 4) {
-            this.priority = "High";
-            this.xp = 20;
+            this.priority = "high";
+            this.xp = 30;
         } else if (priority >= 2.5) {
-            this.priority = "Medium";
-            this.xp = 10;
+            this.priority = "medium";
+            this.xp = 20;
         } else {
-            this.priority = "Low";
-            this.xp = 5;
+            this.priority = "low";
+            this.xp = 10;
         }
 
         next();

@@ -47,49 +47,61 @@ export const createTask = async (req, res) => {
 
 export const getTasks = async (req, res) => {
     try {
-        const { status, withSubtasks, sortByXp } = req.query;
+        const {
+            status,          // "completed" / "pending"
+            withSubtasks,    // "true"
+            priority,        // "high" / "medium" / "low"
+            xp               // exact xp number
+        } = req.query;
 
-        // Base query -> only tasks for the logged-in user
+        // Base query: only logged-in user's tasks
         const query = { user: req.user._id };
 
-        // Filter by status
-        if (status) {
-            if (status === "completed") query.completed = true;
-            else if (status === "pending") query.completed = false;
-        }
+        // ----- FILTERS -----
 
-        // Filter by subtasks
+        // Status filter
+        if (status === "completed") query.completed = true;
+        if (status === "pending") query.completed = false;
+
+        // Subtasks filter
         if (withSubtasks === "true") {
             query.subtasks = { $exists: true, $ne: [] };
         }
 
-        // Fetch tasks based on query
-        let taskQuery = Task.find(query);
-
-        // Sort by XP
-        if (sortByXp) {
-            const sortOrder = sortByXp === "asc" ? 1 : -1;
-            taskQuery = taskQuery.sort({ xp: sortOrder });
+        // Priority filter (string)
+        if (priority) {
+            const allowedPriorities = ["high", "medium", "low"];
+            if (allowedPriorities.includes(priority.toLowerCase())) {
+                query.priority = priority.toLowerCase();
+            }
         }
 
-        // Execute query
-        const tasks = await taskQuery;
+        // XP filter (exact value)
+        if (xp) {
+            query.xp = Number(xp);
+        }
+
+
+
+        // ----- FETCH -----
+        const tasks = await Task.find(query);
 
         res.status(200).json({
             success: true,
-            message: "✅ Tasks fetched successfully",
+            message: "Tasks fetched successfully",
             count: tasks.length,
             tasks,
         });
 
     } catch (error) {
-        console.error("❌ Error fetching tasks:", error.message);
+        console.error("Error fetching tasks:", error);
         res.status(500).json({
             success: false,
             message: "Internal server error",
         });
     }
 };
+
 
 
 export const deleteTask = async (req, res) => {

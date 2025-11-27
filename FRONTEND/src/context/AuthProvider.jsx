@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
-import { Navigate, Outlet } from "react-router-dom";
 import axios from "axios";
 
-const AuthProvider = () => {
-    const [userData, setUserData] = useState(null);
-    const [loading, setLoading] = useState(true); // important
+import { Navigate } from "react-router-dom";
+axios.defaults.withCredentials = true;
+
+const AuthProvider = ({ children }) => {
+    const [userData, setUserData] = useState(undefined);
+    // undefined = loading
+    // null = not logged in
+    // object = logged in
 
     const getMe = async () => {
         try {
             const res = await axios.get("http://localhost:9000/api/auth/me", {
                 withCredentials: true,
             });
-
-            if (res.status === 200) {
-                setUserData(res.data.user); // make sure .user exists
-            }
+            setUserData(res.data.user);
         } catch (err) {
             setUserData(null);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -27,13 +26,16 @@ const AuthProvider = () => {
         getMe();
     }, []);
 
-    if (loading) {
-        return <div style={{ color: "white" }}>Loading...</div>;
-    }
+    // debug: see WHEN userData updates
+    useEffect(() => {
+        console.log("UPDATED userData:", userData);
+    }, [userData]);
+
+
 
     return (
         <AuthContext.Provider value={{ userData, setUserData }}>
-            {userData ? <Outlet /> : <Navigate to="/" replace />}
+            {children}
         </AuthContext.Provider>
     );
 };

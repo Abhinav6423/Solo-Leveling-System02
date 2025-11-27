@@ -5,9 +5,9 @@ const PlayerStats = () => {
   const { userData } = useAuth();
   const stats = [
     { label: "Total XP Earned", value: `${userData?.totalXpEarned}`, color: "text-blue-400" },
-    { label: "Current Level", value: `${userData?.level}` , color: "text-cyan-400"},
-    { label: "Rank Tier", value:` ${userData?.rank}`, color: "text-red-400" },
-    { label: "Completed Tasks", value: `${userData?.completedTasks}` , color: "text-cyan-400"},
+    { label: "Current Level", value: `${userData?.level}`, color: "text-cyan-400" },
+    { label: "Rank Tier", value: ` ${userData?.rank}`, color: "text-red-400" },
+    { label: "Completed Tasks", value: `${userData?.completedTasks}`, color: "text-cyan-400" },
   ];
 
   return (
